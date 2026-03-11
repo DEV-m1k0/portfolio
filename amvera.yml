@@ -7,5 +7,5 @@ meta:
 build:
   additionalCommands: null
   artifacts:
-    build/*: /
+    "dist/**": /
 run: {}
