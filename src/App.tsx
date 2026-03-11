@@ -1,4 +1,5 @@
-﻿import { motion } from "framer-motion"
+﻿import { useEffect, useState } from "react"
+import { AnimatePresence, motion } from "framer-motion"
 import "./App.css"
 
 import QRCode from "./assets/qrcode-tg.png"
@@ -7,23 +8,37 @@ const topProjects = [
   {
     title: "HedgehogCRM2",
     desc: "CRM для IT‑академии Hedgehog: календарь преподавателей, воронка продаж, мониторинг логов и админ‑панели.",
-    stack: ["Django", "DRF", "PostgreSQL", "Redis"],
+    stack: ["FastAPI", "SQLAlchemy", "PostgreSQL", "Redis", "React", "FullCalendar"],
     github: "https://github.com/DEV-m1k0/HedgehogCRM2",
     status: "В процессе",
   },
   {
     title: "Epiphany",
     desc: "Совместная разработка онлайн‑системы наподобие Word/Excel для программистов.",
-    stack: ["FastAPI", "Kafka", "WebSockets"],
+    stack: ["React", "Vite", "Three.js", "Anime.js"],
     github: "https://github.com/DEV-m1k0/Epiphany",
     status: "В процессе",
   },
   {
     title: "DentCare",
     desc: "Стоматологический сайт с онлайн‑записью на приемы к врачам.",
-    stack: ["Django", "PostgreSQL", "Bootstrap"],
+    stack: ["Django", "DRF", "Bootstrap", "Pillow"],
     github: "https://github.com/DEV-m1k0/DentCare",
     status: "Доделан",
+  },
+  {
+    title: "Kursk-News",
+    desc: "Сайт публикации новостей в Курске.",
+    stack: ["Django", "DRF", "Requests", "Pillow"],
+    github: "https://github.com/DEV-m1k0/Kursk-News",
+    status: "Доделан",
+  },
+  {
+    title: "Courses",
+    desc: "Платформа для прохождения онлайн‑курсов.",
+    stack: ["Django", "CodeMirror", "OpenPyXL"],
+    github: "https://github.com/DEV-m1k0/courses",
+    status: "В процессе",
   },
 ]
 
@@ -62,8 +77,52 @@ const fadeUp = {
 }
 
 function App() {
+  const [showIntro, setShowIntro] = useState(true)
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowIntro(false), 2000)
+    return () => clearTimeout(timer)
+  }, [])
+
+  const openRepo = (url: string) => {
+    window.open(url, "_blank", "noopener,noreferrer")
+  }
+
+  const handleCardKeyDown = (event: React.KeyboardEvent<HTMLElement>, url: string) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault()
+      openRepo(url)
+    }
+  }
+
   return (
     <div className="page">
+      <AnimatePresence>
+        {showIntro ? (
+          <motion.div
+            className="intro"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.6 }}
+            onClick={() => setShowIntro(false)}
+          >
+            <motion.div
+              className="intro-card"
+              initial={{ y: 30, opacity: 0, scale: 0.98 }}
+              animate={{ y: 0, opacity: 1, scale: 1 }}
+              exit={{ y: -10, opacity: 0, scale: 0.98 }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <span className="intro-kicker">Добро пожаловать</span>
+              <h2>на сайт‑визитку Князева Антона</h2>
+              <p>Backend‑разработка для бизнес‑проектов</p>
+              <span className="intro-hint">Нажмите, чтобы продолжить</span>
+            </motion.div>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
+
       <div className="bg">
         <span className="blob b1" />
         <span className="blob b2" />
@@ -71,7 +130,12 @@ function App() {
         <span className="grain" />
       </div>
 
-      <main className="wrap">
+      <motion.main
+        className="wrap"
+        initial={{ opacity: 0, y: 20 }}
+        animate={showIntro ? { opacity: 0, y: 20 } : { opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      >
         <motion.header
           className="glass hero"
           initial="hidden"
@@ -219,20 +283,31 @@ function App() {
             {topProjects.map((project, index) => (
               <motion.article
                 key={project.title}
-                className="glass project"
+                className="glass project project-clickable"
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
                 custom={index}
                 variants={fadeUp}
+                onClick={() => openRepo(project.github)}
+                onKeyDown={(event) => handleCardKeyDown(event, project.github)}
+                role="link"
+                tabIndex={0}
+                aria-label={`Открыть ${project.title} на GitHub`}
               >
                 <div className="project-head">
                   <h3>{project.title}</h3>
                   <div className="project-links">
-                    <a href={project.github} target="_blank" className="link">
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="link button"
+                      onClick={(event) => event.stopPropagation()}
+                    >
                       GitHub
                     </a>
-                    <span className="link ghost">{project.status}</span>
+                    <span className="status-badge ghost">{project.status}</span>
                   </div>
                 </div>
                 <p>{project.desc}</p>
@@ -243,26 +318,6 @@ function App() {
                 </div>
               </motion.article>
             ))}
-          </div>
-          <div className="project-list">
-            <div className="glass project-line">
-              <div>
-                <h4>Kursk-News</h4>
-                <p>Сайт публикации новостей в Курске.</p>
-              </div>
-              <a href="https://github.com/DEV-m1k0/Kursk-News" target="_blank" className="link">
-                GitHub
-              </a>
-            </div>
-            <div className="glass project-line">
-              <div>
-                <h4>Courses</h4>
-                <p>Платформа для прохождения онлайн‑курсов.</p>
-              </div>
-              <a href="https://github.com/DEV-m1k0/courses" target="_blank" className="link">
-                GitHub
-              </a>
-            </div>
           </div>
         </section>
 
@@ -297,7 +352,7 @@ function App() {
             <span>Сканируй для Telegram</span>
           </div>
         </motion.section>
-      </main>
+      </motion.main>
     </div>
   )
 }

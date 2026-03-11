@@ -1,4 +1,6 @@
-﻿:root {
+﻿@import url("https://fonts.googleapis.com/css2?family=Fraunces:wght@500;700&family=Space+Grotesk:wght@400;500;600&display=swap");
+
+:root {
   color-scheme: light;
   font-family: "Space Grotesk", system-ui, sans-serif;
   line-height: 1.5;
@@ -55,5 +57,3 @@ button {
 #root {
   min-height: 100vh;
 }
-
-@import url("https://fonts.googleapis.com/css2?family=Fraunces:wght@500;700&family=Space+Grotesk:wght@400;500;600&display=swap");
