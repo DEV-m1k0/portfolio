@@ -8,37 +8,61 @@ const topProjects = [
   {
     title: "HedgehogCRM2",
     desc: "CRM для IT‑академии Hedgehog: календарь преподавателей, воронка продаж, мониторинг логов и админ‑панели.",
-    stack: ["FastAPI", "SQLAlchemy", "PostgreSQL", "Redis", "React", "FullCalendar"],
+    stack: ["Python", "TypeScript", "HTML/CSS", "FastAPI", "SQLAlchemy", "SQLite", "React", "FullCalendar", "Recharts"],
     github: "https://github.com/DEV-m1k0/HedgehogCRM2",
+    status: "В процессе",
+  },
+  {
+    title: "Volga-IT 2024 Web API",
+    desc: "API‑проект для Volga‑IT 2024 с JWT‑аутентификацией и логированием.",
+    stack: ["Django", "DRF", "JWT", "PostgreSQL", "Docker", "Elasticsearch", "Kibana", "pytest"],
+    github: "https://github.com/DEV-m1k0/Volga-it-2024-Web-API",
     status: "В процессе",
   },
   {
     title: "Epiphany",
     desc: "Совместная разработка онлайн‑системы наподобие Word/Excel для программистов.",
-    stack: ["React", "Vite", "Three.js", "Anime.js"],
+    stack: ["Python", "TypeScript", "HTML/CSS", "React", "Three.js", "Anime.js", "Bootstrap Icons"],
     github: "https://github.com/DEV-m1k0/Epiphany",
     status: "В процессе",
   },
   {
     title: "DentCare",
     desc: "Стоматологический сайт с онлайн‑записью на приемы к врачам.",
-    stack: ["Django", "DRF", "Bootstrap", "Pillow"],
+    stack: ["Python", "JavaScript", "HTML/CSS", "Django", "DRF", "Bootstrap", "Crispy Bootstrap 4", "Django Background Tasks"],
     github: "https://github.com/DEV-m1k0/DentCare",
     status: "Доделан",
   },
   {
     title: "Kursk-News",
     desc: "Сайт публикации новостей в Курске.",
-    stack: ["Django", "DRF", "Requests", "Pillow"],
+    stack: ["Python", "JavaScript", "HTML/CSS", "Django", "DRF", "Django Background Tasks", "Bootstrap"],
     github: "https://github.com/DEV-m1k0/Kursk-News",
     status: "Доделан",
   },
   {
     title: "Courses",
     desc: "Платформа для прохождения онлайн‑курсов.",
-    stack: ["Django", "CodeMirror", "OpenPyXL"],
+    stack: ["Python", "JavaScript", "HTML/CSS", "Django", "Django CodeMirror", "DRF", "Bootstrap"],
     github: "https://github.com/DEV-m1k0/courses",
     status: "В процессе",
+  }
+]
+
+const achievements = [
+  {
+    title: "Volga-IT 2024 Web API",
+    items: [
+      "2 место в отборе на международный этап",
+      "7 место на международном этапе",
+    ],
+  },
+  {
+    title: "Профессионалы 2025",
+    items: [
+      "2 место на региональном этапе",
+      "Участие во всероссийском этапе",
+    ],
   },
 ]
 
@@ -60,6 +84,12 @@ const skills = [
   "scikit‑learn",
   "HTML/CSS",
   "Bootstrap",
+  "Elasticsearch",
+  "Kibana",
+  "Grafana",
+  "Prometheus",
+  "Traefik",
+  "JWT",
 ]
 
 const telegram = {
@@ -67,12 +97,14 @@ const telegram = {
   url: "https://t.me/crystal_cast1e",
 }
 
+const easeCurve = [0.16, 1, 0.3, 1] as const
+
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
   visible: (i = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: 0.1 + i * 0.08, duration: 0.7, ease: [0.16, 1, 0.3, 1] },
+    transition: { delay: 0.1 + i * 0.08, duration: 0.7, ease: easeCurve },
   }),
 }
 
@@ -80,7 +112,7 @@ function App() {
   const [showIntro, setShowIntro] = useState(true)
 
   useEffect(() => {
-    const timer = setTimeout(() => setShowIntro(false), 2000)
+    const timer = setTimeout(() => setShowIntro(false), 3000)
     return () => clearTimeout(timer)
   }, [])
 
@@ -112,10 +144,10 @@ function App() {
               initial={{ y: 30, opacity: 0, scale: 0.98 }}
               animate={{ y: 0, opacity: 1, scale: 1 }}
               exit={{ y: -10, opacity: 0, scale: 0.98 }}
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.7, ease: easeCurve }}
             >
               <span className="intro-kicker">Добро пожаловать</span>
-              <h2>на сайт‑визитку Князева Антона</h2>
+              <h2>сайт‑визитка</h2>
               <p>Backend‑разработка для бизнес‑проектов</p>
               <span className="intro-hint">Нажмите, чтобы продолжить</span>
             </motion.div>
@@ -134,7 +166,7 @@ function App() {
         className="wrap"
         initial={{ opacity: 0, y: 20 }}
         animate={showIntro ? { opacity: 0, y: 20 } : { opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.8, ease: easeCurve }}
       >
         <motion.header
           className="glass hero"
@@ -180,7 +212,7 @@ function App() {
                 <div className="pulse-bar" />
                 <div className="mini-metrics">
                   <div>
-                    <strong>5</strong>
+                    <strong>6</strong>
                     <span>ключевых проектов</span>
                   </div>
                   <div>
@@ -194,7 +226,7 @@ function App() {
                 </div>
               </div>
               <div className="glass mini-card alt">
-                <h3>Сильные стороны</h3>
+                <h3>Был опыт работы</h3>
                 <ul className="chips">
                   {skills.map((skill) => (
                     <li key={skill}>{skill}</li>
@@ -219,11 +251,6 @@ function App() {
               Разработка backend‑части: проектирование API, интеграции, безопасность,
               очереди и хранилища данных.
             </p>
-            <div className="pill-row">
-              <span>API‑дизайн</span>
-              <span>Интеграции</span>
-              <span>Производительность</span>
-            </div>
           </motion.div>
 
           <motion.div
@@ -239,11 +266,6 @@ function App() {
               Строгая инженерная дисциплина, читаемая архитектура и надежность
               в продакшене.
             </p>
-            <div className="timeline">
-              <span>Анализ</span>
-              <span>Архитектура</span>
-              <span>Production</span>
-            </div>
           </motion.div>
 
           <motion.div
@@ -321,6 +343,38 @@ function App() {
           </div>
         </section>
 
+        <section className="achievements">
+          <motion.h2
+            className="section-title"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+          >
+            Достижения
+          </motion.h2>
+          <div className="achievements-grid">
+            {achievements.map((achievement, index) => (
+              <motion.article
+                key={achievement.title}
+                className="glass achievement-card"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                custom={index}
+                variants={fadeUp}
+              >
+                <h3>{achievement.title}</h3>
+                <ul>
+                  {achievement.items.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </motion.article>
+            ))}
+          </div>
+        </section>
+
         <motion.section
           id="contact"
           className="glass contact"
@@ -337,15 +391,21 @@ function App() {
             </p>
           </div>
           <div className="contact-actions">
-            <a className="btn primary" href="mailto:knyzevanton8@gmail.com">
-              knyzevanton8@gmail.com
-            </a>
-            <a className="btn ghost" href="https://github.com/DEV-m1k0" target="_blank">
-              GitHub
-            </a>
-            <a className="btn ghost" href={telegram.url} target="_blank">
+            <a className="btn ghost telegram" href={telegram.url} target="_blank" aria-label="Telegram">
+              <span className="icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M21.8 4.3c.3-1.2-1.1-2.2-2.2-1.6L3.2 9.6c-1.3.6-1.2 2.5.1 2.9l4.7 1.6 1.8 5.3c.4 1.3 2.2 1.5 2.9.3l2.5-4.2 4.6 3.4c1.1.8 2.6.1 2.9-1.2l2.9-12.4ZM8.6 13.7l9.6-6.1-7.7 7.5-.3 3.6-1.5-4.2Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </span>
               {telegram.handle}
             </a>
+          </div>
+          <div className="email-box">
+            <span className="label">Почта</span>
+            <a href="mailto:knyzevanton8@gmail.com">knyzevanton8@gmail.com</a>
           </div>
           <div className="glass qr-card">
             <img src={QRCode} alt="Telegram QR" className="qr-image" />

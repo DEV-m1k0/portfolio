@@ -1,0 +1,37 @@
+const topProjects = [
+  {
+    title: "HedgehogCRM2",
+    desc: "CRM для IT‑академии Hedgehog: календарь преподавателей, воронка продаж, мониторинг логов и админ‑панели.",
+    stack: ["Python", "TypeScript", "HTML/CSS", "FastAPI", "SQLAlchemy", "SQLite", "React", "FullCalendar", "Recharts"],
+    github: "https://github.com/DEV-m1k0/HedgehogCRM2",
+    status: "В процессе",
+  },
+  {
+    title: "Epiphany",
+    desc: "Совместная разработка онлайн‑системы наподобие Word/Excel для программистов.",
+    stack: ["Python", "TypeScript", "HTML/CSS", "React", "Three.js", "Anime.js", "Bootstrap Icons"],
+    github: "https://github.com/DEV-m1k0/Epiphany",
+    status: "В процессе",
+  },
+  {
+    title: "DentCare",
+    desc: "Стоматологический сайт с онлайн‑записью на приемы к врачам.",
+    stack: ["Python", "JavaScript", "HTML/CSS", "Django", "DRF", "Bootstrap", "Crispy Bootstrap 4", "Django Background Tasks"],
+    github: "https://github.com/DEV-m1k0/DentCare",
+    status: "Доделан",
+  },
+  {
+    title: "Kursk-News",
+    desc: "Сайт публикации новостей в Курске.",
+    stack: ["Python", "JavaScript", "HTML/CSS", "Django", "DRF", "Django Background Tasks", "Bootstrap"],
+    github: "https://github.com/DEV-m1k0/Kursk-News",
+    status: "Доделан",
+  },
+  {
+    title: "Courses",
+    desc: "Платформа для прохождения онлайн‑курсов.",
+    stack: ["Python", "JavaScript", "HTML/CSS", "Django", "Django CodeMirror", "DRF", "Bootstrap"],
+    github: "https://github.com/DEV-m1k0/courses",
+    status: "В процессе",
+  },
+]
