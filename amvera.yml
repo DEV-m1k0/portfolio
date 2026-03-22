@@ -2,10 +2,19 @@
 meta:
   environment: node
   toolchain:
-    name: browser
+    name: nodejs
     version: 18
 build:
-  additionalCommands: null
+  additionalCommands:
+    - npx prisma generate
+    - npx prisma migrate deploy
   artifacts:
-    "dist/**": /
-run: {}
+    ".next/**": .next
+    "node_modules/**": node_modules
+    "public/**": public
+    "prisma/**": prisma
+    "package.json": package.json
+    "next.config.ts": next.config.ts
+run:
+  persistenceMount: /data
+  command: npm start

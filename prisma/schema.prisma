@@ -1,0 +1,103 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model About {
+  id             Int      @id @default(1)
+  nameRu         String   @default("Антон Князев")
+  nameEn         String   @default("Anton Knyazev")
+  titleRu        String   @default("Backend-разработчик")
+  titleEn        String   @default("Backend Developer")
+  subtitleRu     String   @default("Веб-разработчик. Специализируюсь на backend для бизнес-проектов.")
+  subtitleEn     String   @default("Web developer. Specializing in backend for business projects.")
+  telegramHandle String   @default("@crystal_cast1e")
+  telegramUrl    String   @default("https://t.me/crystal_cast1e")
+  email          String   @default("knyzevanton8@gmail.com")
+  avatarUrl      String?
+  availableForWork Boolean @default(true)
+  updatedAt      DateTime @updatedAt
+}
+
+model Project {
+  id        Int      @id @default(autoincrement())
+  titleRu   String
+  titleEn   String
+  descRu    String
+  descEn    String
+  stack     String   // JSON array
+  githubUrl String
+  liveUrl   String?
+  statusRu  String
+  statusEn  String
+  sortOrder Int      @default(0)
+  visible   Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Skill {
+  id        Int      @id @default(autoincrement())
+  name      String
+  category  String?
+  sortOrder Int      @default(0)
+  visible   Boolean  @default(true)
+}
+
+model Achievement {
+  id        Int      @id @default(autoincrement())
+  titleRu   String
+  titleEn   String
+  items     String   // JSON array of {textRu, textEn}
+  sortOrder Int      @default(0)
+  visible   Boolean  @default(true)
+}
+
+model Experience {
+  id         Int       @id @default(autoincrement())
+  companyRu  String
+  companyEn  String
+  positionRu String
+  positionEn String
+  descRu     String?
+  descEn     String?
+  location   String?
+  startDate  DateTime
+  endDate    DateTime?
+  sortOrder  Int       @default(0)
+  visible    Boolean   @default(true)
+}
+
+model Education {
+  id            Int       @id @default(autoincrement())
+  institutionRu String
+  institutionEn String
+  degreeRu      String
+  degreeEn      String
+  fieldRu       String?
+  fieldEn       String?
+  startDate     DateTime
+  endDate       DateTime?
+  sortOrder     Int       @default(0)
+  visible       Boolean   @default(true)
+}
+
+model Review {
+  id         Int      @id @default(autoincrement())
+  authorName String
+  authorRole String?
+  textRu     String
+  textEn     String?
+  rating     Int      @default(5)
+  status     String   @default("pending")
+  createdAt  DateTime @default(now())
+}
+
+model Admin {
+  id           Int    @id @default(1)
+  passwordHash String
+}
